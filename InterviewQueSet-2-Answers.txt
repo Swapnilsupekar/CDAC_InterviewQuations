@@ -1,0 +1,673 @@
+CoreJava
+===========
+1. Which is ultimate base class in java class hierarchy? List the name of methods of it?
+
+2. Explain narrowing and widening?
+
+3. Explain the difference among final, finally and finalize?
+
+4. Explain the difference among checked and unchecked exception?
+
+5. Explain exception chaining?
+
+6. What do you know about final method?
+
+7. Why java does not support multiple implementation inheritance?
+
+8. Explain marker interface? List the name of some marker interfaces?
+	Explain the significance of marker interface?
+	
+9. Explain the difference among Array and ArrayList?
+
+10. Explain the difference among Hash Table and Hash Map?
+
+11. Explain the difference among HashSet and Hash Map?	
+
+=====================================================================================
+1. Which is ultimate base class in java class hierarchy? List the name of methods of it?
+
+>> In java language "Object" class is a superclass or you can say root class of all classes such as applicable for Java defined classes also for user defined classes.
+    every class extends "Objects" class. 
+    Object class has a 9 methods.
+  1.hashcode() - it gives the hashcode of object where it is store in memory. ie object address location in memory.
+                 ex Student@191455
+                    object.getClass().getName()   -- Student  add @
+                              Integer.toHexString()--191455         
+                                       ^this method take hexadecimal address and convert it into integer format
+  2.equals() - check given to object data is equal or not --for non primitive objects such as Object of String
+  3.toString() - it return String object representation of given object
+  4. getClass- gives name of class whose object is currently running
+  5.clone()  - create and return copy/clone of object 
+  6.finalize  - related with garbage collector .. call this method to remove unreferenced object from gc.
+  7. wait()- to keep thread into waiting/blocking state use wait method. this method  is non static and it releases lock.
+  8. notify() - threads are present in waiting monitor. this method invoke only one thread.
+  9. notifyAll() - threads are present in waiting monitor. this method invoke All thread.
+
+2. Explain narrowing and widening?
+>> to store one type of data into another type of data we need datatype conversion
+  their are 2 type  1.autocasting/upcasting/widening           2.downcating/narrowing
+ 1.autocasting/upcasting/widening- when store lower size datatype into higher size datatype here widening observe
+                                   LHS>RHS 
+                                    this done implicitly so called autocasting. no data loss in this widening
+                                example>>  int i=10;
+                                           double d=i;   //int 2 byte store into double having 8byte
+
+
+ 2.downcating/narrowing - when store higher size datatype into lower size datatype here widening observe
+                                   LHS<RHS 
+                                    this done implicitly so called autocasting. no data loss in this widening
+                                example>>  double d=10.15222;
+                                           int i =(int)d;   //double 8 byte store into int having 2byte  //data loss
+
+
+
+
+3. Explain the difference among final, finally and finalize?
+final>>
+variable-- only assign value to final variable once possible not more than that.
+method--- cant override that method into child class
+class-- cant extends/inherit that class
+
+finally>>
+-- this block excecute if exception come or not come
+  try block either follow catch or finally block
+    always execute
+    keyword used in exception handling
+
+finalize>>
+it is  object class method. used to clear garbage collector.
+when you call this this method. it explicitly remove/make empty garbage collector.
+before remove it check weather any resources hold by any object if yes then separate resource and remove object.
+
+
+
+
+
+4. Explain the difference among 
+                                           checked                        unchecked exception
+                                  occur at compile time                occur at run time 
+                               compiler do not create .class file      compiler create .class file
+                mostly occur bcz  didnt getting required input          mostly occur due to incorrect programming logic
+              do not inherit RuntimeException class                         inherit RuntimeException class    
+ex FileNotFound, ClassNotFOund, IOException , IllegelAccessException               ex ArithmeticException, NullPointerException, NumberFormatException
+ 
+
+
+
+5. Explain exception chaining?
+>> generally exception comes it print actual cause but due to that sometime you didnt get actual cause of exception.
+chained exception use in these situations. we achieve using constructor and method present in Throwable class.
+Constructor >> Throwable(Throwable cause)
+                Throwable(String msg, Throwable cause)
+
+method  >>  getCause()- getting cause and print
+            initCause(Throwable cause)- set the cause
+
+ex 
+   public class ExcepptionHandling{
+   try{
+        NumberFormatException ex=new NumberFormatException("exception" );
+        ex.initCause(new NullPointerException("this is actual cause of exception"));
+            throw ex;
+       }
+   catch(NumberFormatException ex){
+         Sop(ex);   //                   java.lang.NumberFormatException: Exception
+         Sop(ex.getCause());        //    java.lang.NullPointerException: This is actual cause of the exception
+     }
+}    
+
+
+
+
+
+
+
+
+
+
+6. What do you know about final method?
+
+when we use final keyword before any method it become as a final method.
+if yo want to restrict implementation of any perticular method into child class then use final method . 
+once you declare method as final it will be restricted.
+overriden concept not able to apply.
+
+class Sample{
+  public final void first();
+    void second(){
+     sop("parent second"); 
+   }
+}
+class Demo extends Sample{
+   public void first(){              // give compile time error final method can't override
+     sop("first");  
+    }
+    void second(){
+     sop("child second"); 
+   }  
+}
+
+
+
+
+
+
+7. Why java does not support multiple implementation inheritance?
+their are different typpe of inheritance java support like 1.simple 2.mutilevel 3.hierarchical  
+multiple inheritance not supported in java.
+
+multiple inheritance in comes in oops concept. where parent class method inhert into child class.
+generally it means child class extends 2 parent class. but in java what happen if same signature method present in both parent class then compiler not able to select 
+ method of which class. because their is no any priority or something related with that.
+
+class Father{
+  void name(){}
+}
+class Mother{
+  void name(){}
+}
+class Son extends father,Mother{
+   Son s=new Son();
+   s.name();                     //compile time error complier not able to select method bcz present in both class
+}
+
+
+
+
+
+8. Explain marker interface? List the name of some marker interfaces?
+	Explain the significance of marker interface?
+
+>>
+marker interface in nothing but interface does not have a any method inside it. 
+ex 1.Clonnable interface  2.Serializable interface    3.Remote interface
+
+1.Clonnable interface-- to override clone method of object class and throws CloneNotSupportedException
+our actual class not implement clonnable interface.
+
+// By implementing Cloneable interface
+// we make sure that instances of class A
+// can be cloned.
+Class A implements Clonnable{
+  int i;
+ String s;
+   
+    A(int i, String s){
+        this.i=i;
+        this.s=s;
+     }
+  @override 
+  protected Object Clone() throws CloneNotSupportedException{
+         return super.Clone();
+  }
+}
+
+Class Test{
+     public static void main(String args[]) throws CloneNotSupportedException{
+         A a=new A(15,"aniket");
+
+         A b=(A) a.clone();
+// cloning 'a' and holding
+        // new cloned object reference in b
+  
+        // down-casting as clone() return type is Object
+         System.out.println(b.i);                     //15
+        System.out.println(b.s);                      //aniket
+    }
+ }
+
+
+
+2.Serializable interface
+present in package if any class want to store state of object into file then it has to implement Serializable interface called serialization and deserialization.
+
+// By implementing Serializable interface
+// we make sure that state of instances of class A
+// can be saved in a file.
+class A implements Serializable
+{
+    int i;
+    String s;
+  
+    // A class constructor
+    public A(int i,String s)
+    {
+        this.i = i;
+        this.s = s;
+    }
+}
+
+public class Test
+{
+    public static void main(String[] args)
+      throws IOException, ClassNotFoundException
+    {
+        A a = new A(15,"aniket");
+  
+        // Serializing 'a'
+        FileOutputStream fos = new FileOutputStream("xyz.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(a);
+  
+        // De-serializing 'a'
+        FileInputStream fis = new FileInputStream("xyz.txt");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        A b = (A)ois.readObject();//down-casting object
+  
+        System.out.println(b.i+" "+b.s);                  // 15 aniket
+  
+        // closing streams
+        oos.close();
+        ois.close();
+    }
+}
+
+
+3.Remote interface
+remote interfaces used when you have created object on different machine and you want to access that object. this provded by RMI remote method invocation.
+any object ie reote object directly or indirectly implements RemoteInterface.
+
+
+	
+9. Explain the difference among 
+                                         Array                                     ArrayList
+                                     not underlying any ds                       underlying ds is array
+                                     does not have readymade methods             have readymade methods
+                                     not growable                                 growable
+                                     store homogeneous data                       store homo/heterogeneous data
+                                    no load factor                                load factor present
+
+
+10. Explain the difference among 
+                                         Hash Table                                  Hash Map
+                              extends Dictionary and  implement map                  implement map 
+                                      synchronized                                   non synchronized 
+                                      thread safe                                    not thread safe                            
+                                  can share object with multiple thread           can not share object with multiple thread 
+                                    no null key or value                            single null key and multiple null value accpted
+           (faster than Synchronized HashMap) slower performance than HashMap         faster than HashTable                    
+
+
+
+
+
+
+
+11. Explain the difference among 
+                                            HashSet                                          Hash Map
+                                    implement set interface                           implement map interface 
+                                 store as object                                     store as key value pair
+                                     add() method to insert object                   put() method to insert object
+                              internally uses HashMap for implementation              internally does not uses HashSet
+                             slow retrieval bcz work with object                       faster retrieval  because work with key
+                              single null value accepted                               single null key and multiple null value accepted
+                             for iteration uses Enumeration and iterator                 for iteration uses iterator   
+
+                                   
+
+
+================================================================
+AdvJava
+==========
+
+
+1. What do you mean by Dependency Injection? In how many ways can Dependency Injection be done?
+2. What is Spring IOC Container? List some of the benefits of IoC.
+3. What’s the difference between @Component, @Controller, @Repository & @Service annotations in Spring?
+4. What is the use of JDBC DriverManager class?
+5. What is the difference between execute, executeQuery, executeUpdate?
+6. How does Cookies work in Servlets?
+7. What are the advantages of Hibernate over JDBC?
+8. What are the differences between a primary key and a foreign key?
+9. Explain Joins ?
+10. Explain lifecycle of a JSP?
+11. explain lifecycle of a servlet?
+12. What are different types of JDBC Drivers?
+13. What is the difference between GET and POST method?
+14. explain what we mean by an ACID transaction
+15. What are relationships and mention different types of relationships in the DBMS
+16. What are the different types of keys in the database?
+
+
+
+1. What do you mean by Dependency Injection? In how many ways can Dependency Injection be done?
+>>DI-- dependency injection
+In spring we get a object of class on which bean class is dependent. fistly we create object of dependent class and at last create object of bean class.
+DI help us to create loosly coupled connection through programmatically, also it help during code test.
+
+their are different way to create object of perticular class. one ways is using "new" keyword but it creates tight coupling and difficult to test.
+
+their are 2 way to acheive dependency injection 1.using constructor of class 2.using setter method
+
+
+
+
+2. What is Spring IOC Container? List some of the benefits of IoC.
+>> IOC Container
+IOC is a container which is responsible to instantiate, configure and assemble object. take inforamation from xml file and work accordingly.
+main work   1.instantiate application class  2.configure objects    3.assemble dependencies of objects
+their are two way   1. BeanFactory      2.ApplicationContext   
+both are intefaces but ApplicationContext gives more features such Aspect Oriented Programming, message resource handling
+
+first way to create object of BeanFactory using XML file in IOC container
+XmlBeanFactory implements BeanFactory
+{
+    Resource resource=new classPathResource("applicationContext.xml");
+ BeanFactory factory=new XmlBeanFactory(resource);  //to create object of BeanFactory we need object of Resource. that object we pass into constructor of XmlBeanFacory
+
+}
+
+second way to create object of ApplicationContext using XML file in IOC container
+classPathXmlApplictionContext implements ApplicationContext{
+    ApplicationContext context=new ClassPathXmlApplicationContext("applicationContext.xml");
+}
+
+
+
+
+
+3. What’s the difference between @Component, @Controller, @Repository & @Service annotations in Spring?
+
+@Component- a candidate for auto-detection via classpath scanning
+@Controller - a web controller popularized by spring mvc
+@Repository - data manager/storage , ties to enterprise app(dao- data access object)
+@Service- meant to provide bussiness logic
+
+
+
+4. What is the use of JDBC DriverManager class?
+>>DriverManager is class having method getConnection take parameter as   url, username, password
+to establish connection with database at given url path and return Connection object.
+it will firstly open connection with database and close connection after performing any operation.
+
+
+
+
+
+5. What is the difference between execute, executeQuery, executeUpdate?
+we use preparedStatement interface to create query 
+to execute that we use each one.
+executeUpdate--used with ps.executeUpdate() when your query is DML ie insert, update or delete
+executeQuery--used with ps.executeQuery()  when your query is DQL ie Select. for retrieve multiple records from database. return object of ResultSet
+execute             
+
+
+
+
+
+
+6. How does Cookies work in Servlets?
+cookies is text file stored on client computer . this files are kept for tracking information purpose.
+work 1>> server script send set of cookies to browser such as name, username, perticular indentity information of user.
+     2>>browser store that information on local machine
+     3>> when next time browser send request is send to server that cookies also send to server and then server use that information use to identify user.
+
+
+
+7. What are the advantages of Hibernate over JDBC?
+hibernate is not depend on database. same code applicable for all databases such as oracle, mysql, sql server
+hibernate is set object(created in session factory) , if u r using hibernate their is no need of having knowledge of SQL queries.
+
+1. Hibernate mainly solves the object-relational impedance mismatch problems which arise when a relational database is connected by an application written in 
+object oriented programming language style.
+2. In JDBC you need to write code to map the object model’s data representation to a relational model and its corresponding schema. Hibernate itself maps the Java classes to the
+ database tables using XML configuration or by using annotations.
+3.Hibernate uses HQL (Hibernate Query Language) which is similar to SQL but Hibernate’s HQL provides full support to polymorphic queries. 
+HQL understands object-oriented concepts like inheritance, polymorphism, and association.
+4. Hibernate’s code is database independent because you need not change the HQL queries (exceptions are there) when you change the databases like MySQL, oracle, etc and hence it is easy to migrate to a new database.
+ It is achieved by using a dialect to communicate with the database. 
+5.Hibernate minimize the code changes when we add a new column in the database table. 
+6. Hibernate reduces the amount of repeating lines of code which you can often find with JDBC. For your understanding, 
+
+
+
+8. What are the differences between a
+                                        primary key                                   foreign key
+                                      unique                                        null or from primary key column
+                               one primary key column in one table                multiple foreign key column in one table
+                             duplication of primary key not accepted                duplication of foreign key accepted
+                                null key not accepted                                 null key not accepted 
+                                  it not refer any column                           it refer primary column of other table
+   unable to drop  primary key column if it  refered as foreign key         able to drop foreign key column 
+              automatically indexed                                            automatically indexed
+
+
+ 
+                                
+9. Explain Joins ?
+1>>inner join
+ SELECT * FROM EMP INNER JOIN Dept ON EMP.id=Dept.id;
+
+2>>left join
+ SELECT * FROM EMP LEFT JOIN Dept ON EMP.id=Dept.id;
+
+3>>left outer join
+ SELECT * FROM EMP LEFT JOIN Dept ON EMP.id=Dept.id WHERE Dept.id is NULL;
+
+ SELECT * FROM EMP LEFT OUTER JOIN Dept ON EMP.id=Dept.id;
+
+4>>right join
+ SELECT * FROM EMP RIGHT JOIN Dept ON EMP.id=Dept.id;
+
+5>>right outer join
+ SELECT * FROM EMP RIGHT JOIN Dept ON EMP.id=Dept.id WHERE Dept.id is NULL;
+
+ SELECT * FROM EMP RIGHT OUTER JOIN Dept ON EMP.id=Dept.id;
+
+6>>full join
+ SELECT * FROM EMP FULL JOIN Dept ON EMP.id=Dept.id;
+
+7.full outer join
+ SELECT * FROM EMP FULL JOIN Dept ON EMP.id=Dept.id WHERE EMP.ID IS NULL AND Dept.ID IS NULL;
+
+8.self join
+SELECT  A.ID  , B.NAME , A.SALARY FROM EMP A , EMP B WHERE  A.SALARY<B.SALARY;
+
+9>>cartesian/cross join
+     SELECT * FROM EMP,Dept;
+10>> natural join
+  SELECT * FROM EMP natural join Dept;
+
+
+
+
+
+
+
+
+10. Explain lifecycle of a JSP?
+>>Following steps are involved in JSP life cycle:
+
+Translation of JSP page to Servlet
+Compilation of JSP page(Compilation of JSP into test.java)
+Classloading (test.java to test.class)
+Instantiation(Object of the generated Servlet is created)
+Initialization(jspInit() method is invoked by the container)
+Request processing(_jspService()is invoked by the container)
+JSP Cleanup (jspDestroy() method is invoked by the container)
+
+
+
+
+
+
+
+11. explain lifecycle of a servlet?
+>>The entire life cycle of a Servlet is managed by the Servlet container which uses the javax.servlet.Servlet interface to understand the Servlet object and manage it. So, before creating a Servlet object, let’s first understand the life cycle of the Servlet object which is actually understanding how the Servlet container manages the Servlet object.
+
+Stages of the Servlet Life Cycle: The Servlet life cycle mainly goes through four stages,
+
+Loading a Servlet.
+Initializing the Servlet.
+Request handling.
+Destroying the Servlet.
+
+There are three life cycle methods of a Servlet :
+
+init()
+service()
+destroy()
+
+
+Servlet Life Cycle:
+Servlet life cycle can be defined as the stages through which the servlet passes from its creation to its destruction.
+The servlet life cycle consists these stages:
+
+Servlet is borned
+Servlet is initialized
+Servlet is ready to service
+Servlet is servicing
+Servlet is not ready to service
+Servlet is destroyed
+
+
+
+
+
+
+12. What are different types of JDBC Drivers?
+
+>>
+JDBC Driver is a software component that enables java application to interact with the database. There are 4 types of JDBC drivers:
+JDBC-ODBC bridge driver
+Native-API driver (partially java driver)
+Network Protocol driver (fully java driver)
+Thin driver (fully java driver)
+
+1) JDBC-ODBC bridge driver
+The JDBC-ODBC bridge driver uses ODBC driver to connect to the database. The JDBC-ODBC bridge driver converts JDBC method calls into the ODBC function calls. 
+This is now discouraged because of thin driver.
+
+In Java 8, the JDBC-ODBC Bridge has been removed.
+Oracle does not support the JDBC-ODBC Bridge from Java 8. Oracle recommends that you use JDBC drivers provided by the vendor of your database instead of the JDBC-ODBC Bridge.
+
+Advantages:
+easy to use.
+can be easily connected to any database.
+Disadvantages:
+Performance degraded because JDBC method call is converted into the ODBC function calls.
+The ODBC driver needs to be installed on the client machine.
+
+
+Next →← Prev
+JDBC Driver
+JDBC Drivers
+JDBC-ODBC bridge driver
+Native-API driver
+Network Protocol driver
+Thin driver
+JDBC Driver is a software component that enables java application to interact with the database. There are 4 types of JDBC drivers:
+JDBC-ODBC bridge driver
+Native-API driver (partially java driver)
+Network Protocol driver (fully java driver)
+Thin driver (fully java driver)
+1) JDBC-ODBC bridge driver
+The JDBC-ODBC bridge driver uses ODBC driver to connect to the database. The JDBC-ODBC bridge driver converts JDBC method calls into the ODBC function calls. 
+This is now discouraged because of thin driver.
+bridge driver
+In Java 8, the JDBC-ODBC Bridge has been removed.
+Oracle does not support the JDBC-ODBC Bridge from Java 8. Oracle recommends that you use JDBC drivers provided by the vendor of your 
+database instead of the JDBC-ODBC Bridge.
+
+Advantages:
+easy to use.
+can be easily connected to any database.
+Disadvantages:
+Performance degraded because JDBC method call is converted into the ODBC function calls.
+The ODBC driver needs to be installed on the client machine.
+
+ 
+2) Native-API driver
+The Native API driver uses the client-side libraries of the database. The driver converts JDBC method calls into native calls of the database API. 
+It is not written entirely in java.
+Advantage:
+performance upgraded than JDBC-ODBC bridge driver.
+Disadvantage:
+The Native driver needs to be installed on the each client machine.
+The Vendor client library needs to be installed on client machine.
+
+3) Network Protocol driver
+The Network Protocol driver uses middleware (application server) that converts 
+JDBC calls directly or indirectly into the vendor-specific database protocol. It is fully written in java.
+Advantage:
+No client side library is required because of application server that can perform many tasks like auditing, load balancing, logging etc.
+Disadvantages:
+Network support is required on client machine.
+Requires database-specific coding to be done in the middle tier.
+Maintenance of Network Protocol driver becomes costly because it requires database-specific coding to be done in the middle tier.
+
+
+4) Thin driver
+The thin driver converts JDBC calls directly into the vendor-specific database protocol. That is why it is known as thin driver. It is fully written in Java language.
+Advantage:
+Better performance than all other drivers.
+No software is required at client side or server side.
+Disadvantage:
+Drivers depend on the Database.
+
+13. What is the difference between 
+                                                   GET                          POST 
+                                               not   secure                       not secure
+                                       back button no action          back button resubmit the data
+                                      bookmark possible                bookmark not possible
+                                         data shown in url                 data send in hidden way to server
+                            parameter history saved                 parameter history not saved
+       only ask key value allowed                                 all type data allowed, binary data allowed
+
+
+
+
+
+
+14. explain what we mean by an ACID transaction
+A-Atomicity      C-consistency         I-isolation                D-durabilty
+
+A-Atomicity-- if 1 phase of transaction fails whole transaction will going to fail. rollback command execute and transation go to its last stage.
+              transaction restart from starting phase.
+C-consistency-- amount before transaction == amount after transaction 
+               once to complete your transaction update data in the database is consistent.
+      ex  have a 5000 send 1000 to friend having 2000 in his account
+           sum of money of their account before transaction is= 5000+2000=7000
+                after transaction                             =4000+3000=7000
+D-durabilty---due to power cut or due to other any other reason ur transaction was not complete then it will rollback. 
+                but before power cut ur transaction completed then that data will be stored in database
+               nothing but storing data into database is permanant.
+
+
+
+15. What are relationships and mention different types of relationships in the DBMS?
+>>Any association between two entity types is called a relationship. Entities take part in the relationship. It is represented by a diamond shape.
+most of the time relationships observe in between two entities in db.
+ in real world in parent-child relation . child has one father but father have a many child.   teacher teaches many student in same class.
+in db their are 3 type of relationship are observe such as 
+1. one-to-one
+Such a relationship exists when each record of one table is related to only one record of the other table.
+2. Many-to-one or one-to-many
+Such a relationship exists when each record of one table can be related to one or more than one record of the other table.
+ This relationship is the most common relationship found. A one-to-many relationship can also be said as a many-to-one relationship depending upon the way we view it.
+3. Many-to-many
+Such a relationship exists when each record of the first table can be related to one or more than one record of the second table and a single record of the second table can be related to one or more than one record of the first table. A many-to-many relationship can be seen as a two one-to-many relationship which is linked by a 'linking table' or 'associate table'. 
+The linking table links two tables by having fields which are the primary key of the other two tables. 
+
+
+
+
+
+16. What are the different types of keys in the database?
+their are 5 type of key
+1.candidate key---A super key with no repeated attribute is called candidate key
+2.primary key---A super key is a group of single or multiple keys which identifies rows in a table.
+3.composite key---A key which has multiple attributes to uniquely identify rows in a table is called a composite key
+4.foreign key---primary key of one table be the foreign key of another table. Primary Key never accept null values while a foreign key may accept multiple null values.
+5. super key-- A super key is a group of single or multiple keys which identifies rows in a table.
+6.surrogate key--- An artificial key which aims to uniquely identify each record is called a surrogate key
+7.alternate key--- All the keys which are not primary key are called an alternate key
+
+
+
+
+
+
+
+
+

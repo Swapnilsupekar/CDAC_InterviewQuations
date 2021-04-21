@@ -1,0 +1,444 @@
+1.what is the Difference between C++ and java ? 
+2.What are the key features of java?
+3.What is JVM ?
+4.what is oops?why it called as object oriented?
+5.what is Multiple inheritance?Explain with real time and in a programmic way?
+6.Difference between abstract class and interface
+7.What is Encapsulation?Explain with real time example?
+8.what is Polymorphism? and inheritnce?
+9.What is Method Overriding and Method Overloading ?xplain with program?
+10.what is collection?what's its need? if we are having array?
+11.diffrence between array and arraylist? any programmetical difference?
+12.Difference between list and arraylist 
+13.Explain Exception handling and how it is handled?
+14.What is garbage collection?
+15.Explain Public static void main()?
+16.write a program to concat two arraylist if we are having first arraylist of 5 students firstname and then second arraylist of having five student lastname.then how we can concat first student firstname and lastname and others also.
+17.Write a program to reverse a String contents.
+18.write a program to check anagram of string.
+19.Do you Know any versioning tool?explain it?
+20.what is RestApi?Have you used it in your project? and explain how you used it?
+
+
+
+
+
+
+1.what is the Difference between C++ and java ? 
+
+                      c++                                  java
+          platform dependent                          platform independent  
+          used for system programming                to build web applications, enterprise and mobile applications
+          require os as runtime environment          not require os as runtime environment bcz has its own java runtime environment(jre)
+    require only compiler it convert source code      require compiler & interpreter both. compiler>> source code to byte code
+         into machine code                                                                 interpreter>> byte code to machine code
+       support call by value and reference as well     only support call by value
+    supports the goto statement                        Java doesn't support the goto statement
+     C++ supports multiple inheritance                Java doesn't support multiple inheritance through class. It can be achieved by interfaces in java
+   C++ supports operator overloading.                   Java doesn't support operator overloading
+    C++ doesn't support documentation comment.          Java supports documentation comment (/** ... */) 
+     	C++ is nearer to hardware.                       Java is not so interactive with hardware
+     C++ is an object-oriented language. However,               Java is also an object-oriented language.
+    in C language, single root hierarchy is not possible.        However, everything (except fundamental types) is an object in Java.
+                                                                It is a single root hierarchy as everything gets derived from java.lang.Object. 
+
+
+2.What are the key features of java?
+
+1.simple>> easy to learn ,easy to understand. widely used and famous programming language.
+2.secure>>no any other application can able to change java code. for address use hashcode
+3.portable>> eassily tranfer code through file. able to carry in storage device like pendrive
+4.architectural neutral>> reserve same memory on 32 bit as well as on 64 bit machine
+5.high performance>> read and writable by human
+6.robust>> code run on ur machine should not fail on other machine. also capable to handle all exception 
+7.platform independent>> give same output on different os due to jvm
+8.multithreaded>> process>>program in execution  >> creable many thread of single process.(create new stack for each thread)
+9.object oriented>> except primitive data type everthing is in object oriented way
+
+3.What is JVM ?
+jvm is java virtual machine which is not have physical existance. it is abstract machine.
+jvm working depends on the implementation.oracle provide implementation to jvm.
+as  per implementation of jvm execute class file with the help of java runtime environment.
+
+process>>
+1.load class file
+2.verify byte code
+3.excute 
+4. provide runtime environment.
+
+their are 3 modules of jvm such as 
+1.class loader
+2.jvm memory area
+3. execution
+
+1.class loader
+1.1>>bootstrap class loader>> it is super class of extension class  loader.it help to load a class file. it has a packages such as util,lang, io, sql, Math.
+1.2>>extension class loader>> it is super class of system/application class loader. it take file from path java/jre/ex_directory
+1.3>>system/application class loader>> it set your current work directory as classapath
+
+2.jvm memory area
+2.1>>stack>> store primitive data types, references of object present at heap, create stack for each thread
+2.2>>heap>> object created by using new as well as by literal stored in heap. it has 2 sections first heap and second constant string pool
+2.3>>class(method) area>> store info of class, method/functions
+2.4>>pc register>> store of current instruction executed by jvm
+2.5>>native area>> store info of native methods
+
+3. execution
+3.1 >>processor>>for process
+3.2>>interpreter >> it interprete code line by line form byte code to machine code
+3.3>>jit >>just in time compiler>> improve performance, similar/ repeatative byte code compiled by jit compiler. convert jvm instrction set to cpu specific set.
+
+
+JNI - java  native interface >> if code in c/c++ JNI help to run that code in java
+
+
+
+4.what is oops?why it called as object oriented?
+oos stand for object oriented programing. all the task done b using object. object like a real world entity. has a state and behaviour.
+we achieve real life things in programaticlly way called as object oriented programing. where object is part of class. which play very important role to use/achieve 
+these oops properties. in java their 8 oops properties to be considered suc as
+1.abstraction 2. encapsulation 3.inheritance 4.polymorphism  5.class 6.object 7. method 8.message passing
+
+1.abstraction>>
+ abstarction is one property in oops. it means showing only required or necessary things to user by hiding internal implementation.
+ we achieve abstraction using ke word abstract and interface. if you are using abstract keyword then you acheive 10-100% abstraction.
+but if you are using interface keyword then you acheive 100% abstraction.
+both are used to hide data and so only required data.
+
+2.encapsualation
+encapsualation is one property in oops. it is used to bind data member and member function together. that bind state and behaviour using class.
+here we keep data members/variables as private and methods/functions keep as public. getter setter are used to achieve encapsualation .
+hide data from other classes and if want to access then use member functions of that class we keep public for funtions/methods of that same class.
+we provide a shield of class that hiding data from outside termed as encapsualation .
+
+3.inheritance
+inheritance is one property in oops. it is based on real world term  inheritance.
+with the help of inheritance we can able to inherit property from base/parent/super class to derived/child/sub class .
+it will inndirectly help to reduce code complexity....just reuse the code.
+in inheritance their is a "is a "relationship observed.
+to pass or access data of parent class into child class we use super keyword.
+
+4.polymorphism 
+polymorphism is one property in oops. it means one things has a different form. if their is a inheritance then we can easily achieve polymorphism.
+same method name give different output as per their reference object type.
+achieve in two way  
+4.1 overloading >>In same class  methods name is same but number/type of argument passed to that method as per that we will get different output.
+4.2 overriding >>In child class method is is same as in present in parent class but we provide different method body that why  it will give different output.
+
+
+5.class
+class is one property in oops.in oops class play very important role. mainly it is a blueprint to create a object.
+class has data member and member function. class name should be in Pascal case. It is easy to find things with the help of class.
+in one class file their is only one public class accepted in java not more than one.
+class has state and behaviour. in oops using keyyword we can easily apply oops concept on class posible.
+ class name should be unique to avoid collision with same name.
+
+6.object 
+object  is one property in oops. object  is nothing but instance of class.
+to apply oops property we need class along with object. we can create a object in different way. such as 
+1.using new keyword  2. using deserialization   3.using newInstance() method 4.using shallow/deep copy
+object is like a real world entity. it has physical existance
+
+7 method 
+method is one property in oops. method contains access modifier, return type , method name and parameters in method signature.
+every object of class where this method is present will able to use this method.
+every method has a return type.
+
+8 message passing 
+A message for an object is a request for execution of a procedure and therefore will invoke a function in the receiving object that generates the desired results.
+ Message passing involves specifying the name of the object, the name of the function and the information to be sent.
+
+
+5.what is Multiple inheritance?Explain with real time and in a programmic way?
+>>Multiple inheritance
+Inheritance is one of the pillar of oops. it has different types 
+1.simple 2. multiple 3.multilevel  4.hierarchical
+
+Multiple inheritance is concept where class extends two class. but Multiple inheritance is not supported in java.
+because was happen at run time jvm get confused  that from which class calling method has to execute.
+
+real time exapmle : class Son extends Father, Mother actual inheritance not possible using "extends"
+
+prog example
+class Dataone{
+  void data(){
+      System.out.println("Dataone");
+  }
+}
+
+class Datatwo{
+  void data(){
+      System.out.println("Datatwo");
+  }
+}
+
+class Mydata extends Dataone,Datatwo
+{
+   Mydata  my=new Mydata();
+    my.data();                                          //will give error , that is ambiguity condition arises calling method found in both arent classes
+}
+
+
+
+solution on multiple inheritance is interface
+
+interface One{
+   public abstract eating();
+}
+
+interface Two{
+   public abstract walking();
+}
+class Combine implements One, Two{                      // this class implements 2 interfaces which was not possible to extends 2 classes
+    public eating(){
+          System.out.println("eating method from One");
+    }
+    public walking(){
+          System.out.println("walking method from Two");
+    }
+}
+
+
+
+
+
+
+6.Difference between                     
+                                                 abstract class                                                                 interface
+>> contain                                    abstract or not abstract method present                                only  abstract method present
+>>access modifier                            public,default, protected used in  abstract class                     only public modifier used in interface  
+>> static                                    static, non static                                                     static only
+>> final                                     final, non final                                                       final only  
+>>methods                                      public,default, protected                                           only public modifier bydefault
+>>implement                             abstract class implement inteface                                         interface cant implement abstract class
+>>extends                               abstract class extends java class                                         inteface extends interface
+>>use                                  "extends"                                                                    "implements"
+>>declare                               using "abstract"                                                         using "inteface"
+>>ex                                     public abstract class Shape{                                           public interface Drawable{
+                                           public abstract void draw();                                             void draw(); //override in child access modifier is public bcz cant decrease AM
+                                         }                                                                      }
+                                      
+
+
+7.What is Encapsulation?Explain with real time example?
+encapsualation
+encapsualation is one property in oops. it is used to bind data member and member function together. that bind state and behaviour using class.
+here we keep data members/variables as private and methods/functions keep as public. getter setter are used to achieve encapsualation .
+hide data from other classes and if want to access then use member functions of that class we keep public for funtions/methods of that same class.
+we provide a shield of class that hiding data from outside termed as encapsualation .
+
+public class Student{
+     private int id;
+     private String name;
+     private int age;
+
+     public void setId(int id){
+             this.id=id; 
+      }
+     public int getId(){
+          return id;
+      }
+      public void setName(String name){
+             this.name=name; 
+      }
+     public int getName(){
+          return name;
+      }
+      public void setAge(int age){
+             this.age=age; 
+      }
+     public int getAge(){
+          return age;
+      }
+}
+
+
+
+8.what is Polymorphism? and inheritance?
+ polymorphism 
+polymorphism is one property in oops. it means one things has a different form. if their is a inheritance then we can easily achieve polymorphism.
+same method name give different output as per their reference object type.
+achieve in two way  
+4.1>>method overloading >>In same class  methods name is same but number/type of argument passed to that method as per that we will get different output.
+4.2>>method overriding >>In child class method is is same as in present in parent class but we provide different method body that why  it will give different output.
+
+inheritance
+inheritance is one property in oops. it is based on real world term  inheritance.
+with the help of inheritance we can able to inherit property from base/parent/super class to derived/child/sub class .
+it will inndirectly help to reduce code complexity....just reuse the code.
+in inheritance their is a "is a "relationship observed.
+to pass or access data of parent class into child class we use super keyword.           
+
+
+
+9.What is Method Overriding and Method Overloading ?explain with program?
+  Method Overloading>>
+  Observe in same class. When method name is same. just change in type/number of argument passed to that perticular method.
+  return type doesn't matter on method overloading. you can easily acheive method overloading using same name of method.
+  method overloading contains static polymorphism.
+
+
+public class Shape{
+
+   public int area(int a){
+          int ans=a*a;
+          return ans;
+   }
+
+   public int area(int a,int b){
+          int ans=a*b;
+          return ans;
+   }
+
+   public int area(int a,int b){
+          int ans=1/2(a*b);
+          return ans;
+   }
+}
+
+
+  Method Overriding>>
+  possible when inheritance concept is used in two classes ie we need parent class and child class for method overriding.
+  this concept is given dynamic binding/late binding. 
+  ie at compile time compiler bind method as per type of reference and at run time JVM bind method as per type of object.
+   possible only when method already present in parent class and same method present in child class with different method body.
+
+prog example
+class Parent{
+  void data(){
+      System.out.println("Parent");
+  }
+}
+
+class Child extends Parent{
+  void data(){
+      System.out.println("Child");
+  }
+}
+
+class Mydata 
+{
+   Mydata  my=new Mydata();
+    my.data();                      //static polymorphism  o/p---parent 
+
+      Mydata  my=new  Child();
+       my.data();                    //dynamic polymorphism   o/p---Child                           
+}
+
+
+
+10.what is collection?what's its need? if we are having array?
+
+Collection is a framework. also it is root interface of collection hierarchy. which is present in java.util.*  .  
+ it basically used if you you want represent a group of object and you want store or manipulate that data.
+ easy to use. it has so many type as per input requirement. you can select any interface as per need.
+ it contains onterfaces and classes. which underlying some algorithms and data structure.
+ it has a method we are accessible for collections framework such as 
+add(), remove(),clear(), size(), iterator()
+
+                      
+                        array                                             collection
+                        class                                                 interface 
+                       fixed in size                                        dynamic in size                         
+                       not growable                                          growable
+             store homogeneous data(primitive/non primitive)                store non homogeneous data (i.e non primitive datatype)
+                         not memory efficient                              memory efficient   
+                        data retrieval fast                                 data retrieval slow
+                    not underlying ds                                       underlying ds
+                    no ready made methods                                  ready made methods supports
+
+
+11.diffrence between array and arraylist? any programmetical difference?
+
+                          array                             arraylist                  
+                        class                               class
+                        fixed in size                       dynamic in size
+                       not growable                         growable
+                      not preferable wrt memory             preferable wrt memory
+                      preferable wrf performance            not preferable wrt performance
+                       not underlying ds                     underlying ds
+                     no ready made methods                  ready made methods supports
+
+12.Difference between 
+                             list                            arraylist 
+                              interface                      class
+                           extends Collection             implements list
+
+
+
+
+13.Explain Exception handling and how it is handled?
+error can not handled in java. but if exception come class like exception handle that exception.  that class is present in java.lang.*
+their are two type of exception present 1.checked exception 2.unchecked exception
+
+1.checked exception>>
+1.1 >>ClassNotFOundException
+1.2 >>MethodNotFoundException
+1.3 >>IOExcetion
+1.4>>NumberFormatException
+
+2.unchecked exception
+2.1 >>ArithmeticException
+2.2 >>NullPointerException
+2.3 >>ArrayIndexOutOfBoundsException
+
+handle Exception
+1.Using try catch   block
+2. Using throw keyword
+3.  Using throws keyword in method signature
+
+
+14.What is garbage collection?
+when we build aplication we create objects. in memory we store object those having a reference stored in program.
+in any object present in memory does not have a reference then that object become part of garbage collection.
+it clear garbage collector automatically/implicitly
+but if you want to clear explicitly then also possible. that is using  1.System.gc()       2. Runtime.getRuntime.gc()
+
+when you do it explicitly
+it will check if any resource hold by  any object. firstly he remove resources hold by that object. then it will make free space to create new object.
+
+
+
+15.Explain Public static void main()?
+
+Access modifier >>their 4 type of access modifier used
+1.1  private>> in same class
+1.2  default>>in same package
+1.3  protected>> in same as well in another package condition is that class extend as a inheritance
+1.4  public>>accessible anywhere
+ 
+
+static
+static data member and meber functions are allocate memory at the time of class loading.
+static block is present. that block execute first and only once.
+static method only contains static variable.
+
+
+void
+it will not return anything
+every method has a return type. it may be any type.
+like void, int , String all primitive/non  primitive data type.
+
+
+main()
+program excution always start from main method.
+jvm search for start method.
+make main method static so data member and member function allocate memory during class loading at start.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
